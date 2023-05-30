@@ -8,6 +8,7 @@
 from itemadapter import ItemAdapter
 
 
-class PytutorialPipeline:
+class QuotesPipeline:
     def process_item(self, item, spider):
+        print("Pipeline: " + item['title'])
         return item
