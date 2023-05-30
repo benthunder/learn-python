@@ -6,9 +6,16 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+import pymongo
+from pymongo import MongoClient
 
 
 class QuotesPipeline:
+    def __init__(self):
+        self.conn = MongoClient('localhost', 27017)
+        db = self.conn['quotes']
+        self.collection = db['quotes_db']
+
     def process_item(self, item, spider):
-        print("Pipeline: " + item['title'])
+        self.collection.insert_one(dict(item))
         return item
